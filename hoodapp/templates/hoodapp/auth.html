@@ -1,0 +1,67 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block body%}
+
+<!-- Login -->
+{%if page == 'login' %}
+<section class="contact-us-form  mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h4>Login</h4>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="post">
+            {%csrf_token%}
+                <fieldset>
+                  <input type="text" name="username" id="name" placeholder="username..." autocomplete="on" required>
+                </fieldset>
+                <fieldset>
+                    <input type="password" name="password" id="name" placeholder="password..." required>
+                  </fieldset>
+                <div class="row">
+                    <fieldset class="col-md-6">
+                        <button type="submit" id="form-submit" class="orange-button">Submit</button>
+                    </fieldset>
+                    <div class="col-md-6">
+                        <p>Dont have an account <a class='signup-link' href="{%url 'register'%}">Signup? </a></p>
+                    </div>
+                </div>
+                
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+{%else%}
+<section class="contact-us-form  mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h4>Register</h4>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="post">
+            {%csrf_token%}
+                {{form}}
+                <div class="row">
+                    <fieldset class="col-md-6">
+                        <button type="submit" id="form-submit" class="orange-button">Submit</button>
+                    </fieldset>
+                    <div class="col-md-6">
+                        <p>Already have an account? <a class='signup-link' href="{%url 'login'%}">Login? </a></p>
+                    </div>
+                </div>
+                
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+{%endif%}
+{%endblock%}
