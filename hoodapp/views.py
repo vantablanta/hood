@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
+from hoodapp.models import Hood
+from .forms import RegisterForm
+
 # Create your views here.
 def login_user(request):
     page = 'login'
@@ -7,7 +10,8 @@ def login_user(request):
     return render(request, 'hoodapp/auth.html', ctx)
 
 def register_user(request):
-    ctx = {}
+    form  = RegisterForm()
+    ctx = {'form': form}
     return render(request, 'hoodapp/auth.html', ctx)
 
 def home(request):
@@ -23,8 +27,14 @@ def about(request):
     return render(request, 'hoodapp/about-us.html', ctx)
 
 def hoods(request):
-    ctx = {}
+    hoods = Hood.objects.all()
+    ctx = {'hoods': hoods}
     return render(request, 'hoodapp/hoods.html', ctx)
+
+def single_hood(request, name):
+    hood = Hood.objects.get(name = name)
+    ctx = {'hood': hood}
+    return render(request, 'hoodapp/single-hood.html', ctx)
 
 def create_hood(request):
     ctx = {}

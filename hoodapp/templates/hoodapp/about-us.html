@@ -3,17 +3,17 @@
 {%block body%}
 
 
-  <!-- ***** Header Area Start ***** -->
-  <header class="header-area header-sticky">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-              <div class="col-12">               
-                {%include 'nav.html' %}
-              </div>
-            </div>
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="col-12">
+          {%include 'nav.html' %}
         </div>
+      </div>
     </div>
+  </div>
 </header>
 <!-- ***** Header Area End ***** -->
 
@@ -44,64 +44,69 @@
         <div class="accordions is-first-expanded">
           <article class="accordion">
             <div class="accordion-head">
-                <span>Mexant Financial Planning</span>
-                <span class="icon">
-                    <i class="icon fa fa-chevron-right"></i>
-                </span>
+              <span>Discover Businesses In Your Hood.</span>
+              <span class="icon">
+                <i class="icon fa fa-chevron-right"></i>
+              </span>
             </div>
             <div class="accordion-body">
-                <div class="content">
-                    <p>You will see a bunch of free CSS templates when you search on Google. TemplateMo website is probably the best one because it is 100% free. 
-                    <br><br>We do not ask you anything in return. You are free to use our templates for any purpose.</p>
-                </div>
+              <div class="content">
+                <p>You will see bunch of businesses listed out within the hood that you joined. These businesses will
+                  be listed to allow easy access from wherever in the hood.
+                  <br><br>The businesses have numbers and locations listed out for easy access.
+                </p>
+              </div>
             </div>
-        </article>
-        <article class="accordion">
-          <div class="accordion-head">
-              <span>Mexant Crypto Investing</span>
+          </article>
+          <article class="accordion">
+            <div class="accordion-head">
+              <span>Get Trending News in your Hood</span>
               <span class="icon">
-                  <i class="icon fa fa-chevron-right"></i>
+                <i class="icon fa fa-chevron-right"></i>
               </span>
-          </div>
-          <div class="accordion-body">
+            </div>
+            <div class="accordion-body">
               <div class="content">
-                  <p>Mexant HTML5 Template is available to download 100% free of charge. This CSS layout is based on Boostrap 5 framework. 
-                  <br><br>Anyone can edit and use this layout for all professional websites. Thank you for visiting TemplateMo website.</p>
+                <p>Be in the loop of whats hapening within your hood. Get news updates, meeting updates and much
+                  more about you hood.
+                  <br><br>You can easily pass and recieve news about your hood right from yout hood application.
+                </p>
               </div>
-          </div>
-        </article>
-        <article class="accordion">
-          <div class="accordion-head">
-              <span>Cryptocurrency Investments</span>
+            </div>
+          </article>
+          <article class="accordion">
+            <div class="accordion-head">
+              <span>Connect With Your Neighbours</span>
               <span class="icon">
-                  <i class="icon fa fa-chevron-right"></i>
+                <i class="icon fa fa-chevron-right"></i>
               </span>
-          </div>
-          <div class="accordion-body">
+            </div>
+            <div class="accordion-body">
               <div class="content">
-                  <p>Ut dictum vehicula massa, ac pharetra leo tincidunt eu. Phasellus in tristique magna, ac gravida leo.<br><br>
-                  Integer sed lorem sapien. Ut viverra mauris sed lobortis commodo. Mauris scelerisque venenatis justo, sed interdum sem.</p>
+                <p>You can see the various memebrs within your hood and start conversations with them.
+                  <br><br>Stay connected and with your neigbours right from your phone.
+                </p>
               </div>
-          </div>
-        </article>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
-  </div>
-</section>  
+</section>
 
 <section class="simple-cta">
   <div class="container">
     <div class="row">
       <div class="col-lg-5">
-        <h4>Business <em>Solutions</em> and <strong>Crypto</strong> Investments</h4>
+        <h4>Discover <em>Hoods</em> and <strong>Get Connected</strong> To Your Neighbours</h4>
       </div>
       <div class="col-lg-7">
         <div class="buttons">
           <div class="green-button">
-            <a href="#">Discover More</a>
+            <a href="{%url 'hoods' %}">Discover Hoods</a>
           </div>
           <div class="orange-button">
-            <a href="#">Contact Us</a>
+            <a href="{%url 'contact-us'%}">Contact Us</a>
           </div>
         </div>
       </div>
@@ -114,10 +119,14 @@
     <div class="row">
       <div class="col-lg-5">
         <div class="left-content">
-          <h4>Please tell us about your idea and how you want it to be</h4>
-          <p>If you need more HTML templates, you can try visiting TooCSS blog and Tooplate websites. You can get many good templates on those websites.<br><br>Nulla non placerat neque, a gravida elit. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi sed dolor condimentum tellus commodo volutpat non malesuada turpis.</p>
+          <h4>Cant find a hood you belong to? </h4>
+          <p>If you cant seem to find a hood you feel you belong to you can always create a hood and manage its
+            activities.
+            Create a hood and have members join you so you can have a safe and secure hood to communicate. <br><br>
+            Register a hood below and commuincate with members who join it. Check out businesses that register.
+          </p>
           <div class="green-button">
-            <a href="{%url 'contact-us'%}">Discover More</a>
+            <a href="{%url 'create-hood'%}">Create Hood</a>
           </div>
         </div>
       </div>
@@ -128,28 +137,31 @@
               <div class="item">
                 <em>01</em>
                 <h4>First Step</h4>
-                <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
+                <p>Join a hood that has community members from the same neighbourhood as you. Incase none exist, create
+                  your own hood.</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="item">
                 <em>02</em>
                 <h4>Second Step</h4>
-                <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
+                <p>Communicate by members within the hood. Be respectful and cordial. Enlist your businesses incase you
+                  have any so members acn easily know where they are.</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="item">
                 <em>03</em>
                 <h4>Third Step</h4>
-                <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
+                <p>Get informtion about whats happening in your hood easily. Check out th news section, community
+                  section and business section.</p>
               </div>
             </div>
             <div class="col-lg-6">
               <div class="item">
                 <em>04</em>
                 <h4>Fourth Step</h4>
-                <p>Pellentesque ipsum elit, congue a sapien laoreet, pellentesque ultricies risus.</p>
+                <p>Enjoy the hood experince and share it with other people within your hood.</p>
               </div>
             </div>
           </div>
@@ -196,6 +208,3 @@
   </div>
 </section>
 {%endblock%}
-
-
-  
