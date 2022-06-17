@@ -3,8 +3,7 @@
 
 {%block body%}
 
-<!-- Login -->
-{%if join == False %}
+{%if page == 'join' %}
 <section class="contact-us-form  mb-5">
     <div class="container mb-5">
         <div class="row mb-5">
@@ -26,6 +25,7 @@
     </div>
 </section>
 {%else%}
-
+<p>Leave Hood</p>
 {%endif%}
+
 {%endblock%}
