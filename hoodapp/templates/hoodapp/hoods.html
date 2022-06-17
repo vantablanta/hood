@@ -35,6 +35,9 @@
           <div class="service-item">
             <i class="fas fa-map-marker-alt"></i>
             <h4>{{hood.name}}</h4>
+            {%if joined%}
+            <p>Currently Joined</p>
+            {%endif%}
             <p> Location ~ {{hood.location}}</p>
             <p>Members ~ {{hood.members.owner}}</p>
           </div>
@@ -44,6 +47,7 @@
     </div>
   </div> 
 </section>
+
 {%endblock%}
 <div class="col-lg-6">
   <div class="service-item">
