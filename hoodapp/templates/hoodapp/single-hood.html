@@ -6,7 +6,25 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                {%include 'nav.html' %}
+                <nav class="main-nav">
+                    <!-- ***** Logo Start ***** -->
+                    <a href="{%url 'home' %}" class="logo">
+                        <img src="/static/assets/images/logo.png" alt="">
+                    </a>
+                    <!-- ***** Logo End ***** -->
+                
+                    <!-- ***** Menu Start ***** -->
+                    <ul class="nav">
+                        <li class="scroll-to-section"><a href="{%url 'home' %}">Home</a></li>
+                        <li class="scroll-to-section"><a href="">Profile</a></li>
+                        <li class="scroll-to-section"><a href="{%url 'about-us' %}">About</a></li>
+                        <li class="scroll-to-section"><a href="{%url 'login' %}">Login</a></li>
+                    </ul>        
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                    <!-- ***** Menu End ***** -->
+                </nav>
             </div>
         </div>
     </div>
@@ -120,12 +138,12 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-5">
-                <h4>Join <em>{{hood.name}} Hood</em>
+                <h4>Have you recently moved and would like to join a different <em>Hood </em>?
             </div>
             <div class="col-lg-7">
                 <div class="buttons">
                     <div class="orange-button">
-                        <a href="{%url 'contact-us'%}">Join Hood</a>
+                        <a href="{%url 'hoods' %}">Leave Hood</a>
                     </div>
                 </div>
             </div>

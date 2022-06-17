@@ -1,6 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
-from hoodapp.models import Hood
+from hoodapp.models import Hood, Profile
 from .forms import RegisterForm
 
 # Create your views here.
@@ -35,6 +35,20 @@ def single_hood(request, name):
     hood = Hood.objects.get(name = name)
     ctx = {'hood': hood}
     return render(request, 'hoodapp/single-hood.html', ctx)
+
+def join_hood(request, name):
+    hood = Hood.objects.get(name = name)
+    join = False
+    user = request.user 
+    if request.method == 'POST':
+        profile = Profile.objects.get(owner = user)
+        profile.create(hood=hood)
+        profile.save()
+
+        return redirect('hood')
+
+    ctx = {'join': join, 'obj': hood}
+    return render(request, 'hoodapp/join.html', ctx)
 
 def create_hood(request):
     ctx = {}

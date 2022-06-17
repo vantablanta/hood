@@ -1,0 +1,31 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block body%}
+
+<!-- Login -->
+{%if join == False %}
+<section class="contact-us-form  mb-5">
+    <div class="container mb-5">
+        <div class="row mb-5">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="section-heading">
+                    <h4>Join {{obj}} Hood? </h4>
+                </div>
+            </div>
+            <div class="col-lg-10">
+                <form class='mb-5'id="" action="{%url 'hood' obj.name%}" method="POST">
+                    {%csrf_token%}
+                    <div class="row text-center pt-5">
+                        <a href="{{request.META.HTTP_REFERER}}" class="btn fs-4 col-md-6"  style="color: #ff511a;">Go Back</a>
+                        <input type="submit" class="btn col-md-6 fs-4" value="Confirm" style="color: #43ba7f;">     
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{%else%}
+
+{%endif%}
+{%endblock%}
