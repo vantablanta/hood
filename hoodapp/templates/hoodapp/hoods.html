@@ -30,25 +30,38 @@
   <div class="container">
     <div class="row">
       {%for hood in hoods%}
+      {%if hood.name == member.hood.name%}
+      <a class='col-lg-6' href="{%url 'hood' hood.name%}">
+        <div class="">
+          <div class="service-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <h4>{{hood.name}}</h4>
+            <p> Location ~ {{hood.location}}</p>
+            <i class="fas fa-user-check float-end"  style="color: #ff511a; font-size: 20px;"></i>
+          </div>
+        </div>
+      </a>
+      {%else%}
       <a class='col-lg-6' href="{%url 'join-hood' hood.name%}">
         <div class="">
           <div class="service-item">
             <i class="fas fa-map-marker-alt"></i>
             <h4>{{hood.name}}</h4>
-            {%if joined%}
-            <p>Currently Joined</p>
-            {%endif%}
             <p> Location ~ {{hood.location}}</p>
-            <p>Members ~ {{hood.members.owner}}</p>
           </div>
         </div>
       </a>
+      {%endif%}
       {%endfor%}
     </div>
   </div> 
 </section>
 
 {%endblock%}
+
+
+
+
 <div class="col-lg-6">
   <div class="service-item">
     <i class="fas fa-cloud"></i>

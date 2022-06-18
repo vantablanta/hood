@@ -71,12 +71,14 @@ def about(request):
 
 def hoods(request):
     hoods = Hood.objects.all()
-    ctx = {'hoods': hoods}
+    member = Profile.objects.get(owner = request.user)
+    ctx = {'hoods': hoods, 'member': member}
     return render(request, 'hoodapp/hoods.html', ctx)
 
 def single_hood(request, name):
     hood = Hood.objects.get(name = name)
-    ctx = {'hood': hood}
+    current_user = Profile.objects.get(owner = request.user)
+    ctx = {'hood': hood, 'current_user': current_user}
     return render(request, 'hoodapp/single-hood.html', ctx)
 
 @login_required(login_url='login')
