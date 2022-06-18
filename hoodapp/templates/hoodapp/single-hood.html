@@ -12,7 +12,7 @@
                         <img src="/static/assets/images/logo.png" alt="">
                     </a>
                     <!-- ***** Logo End ***** -->
-                
+
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li class="scroll-to-section"><a href="{%url 'home' %}">Home</a></li>
@@ -24,7 +24,7 @@
                         {%else%}
                         <li class="scroll-to-section"><a href="{%url 'login' %}">Login</a></li>
                         {%endif%}
-                    </ul>        
+                    </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
                     </a>
@@ -59,9 +59,11 @@
                 <section class="services" id="services">
                     <div class="">
                         <div class="service-item">
-                            <h4>Admin ~ {{hood.admin.username}}</h4>
+                            <h5>Hood admin: {{hood.admin.username}}</h5>
                             <p>Location ~ {{hood.location}}</p>
-                            <p>Members ~ {{hood.members.owner}}</p>
+                            {%if hood.admin.email%}
+                            <p class="float-end"><a href="mailto:{{hood.admin.email}}">Contact Admin</a></p>
+                            {%endif%}
                         </div>
                     </div>
                 </section>

@@ -131,7 +131,6 @@ def update_profile(request):
             form.save()
             return redirect('profile')
 
-
     ctx = {'profile': profile, 'form':form}
     return render(request, 'hoodapp/update-profile.html', ctx)
 
