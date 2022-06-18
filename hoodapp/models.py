@@ -33,5 +33,16 @@ class News(models.Model):
     def __str__(self) :
         return self.title
 
+class Business(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    name = models.CharField(max_length=300, blank=True, null=True)
+    location = models.TextField()
+    contact = models.CharField(max_length=300, blank=True, null=True)
+    hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) :
+        return self.name
+
 
 

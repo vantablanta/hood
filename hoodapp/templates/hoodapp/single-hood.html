@@ -92,22 +92,24 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
-                                            <form action=""  id='contact' method="POST">
+                                            <form action="" id='contact' method="POST">
                                                 {%csrf_token%}
                                                 <div class="row">
                                                     <div class="">
-                                                      <fieldset>
-                                                        <input type="text" name="title" id="name" placeholder="News Tile..." required>
-                                                      </fieldset>
+                                                        <fieldset>
+                                                            <input type="text" name="title" id="name"
+                                                                placeholder="News Tile..." required>
+                                                        </fieldset>
                                                     </div>
                                                     <div class="">
-                                                      <fieldset>
-                                                        <textarea type="text" name="body" id="body" placeholder="News Content.."required></textarea>
-                                                      </fieldset>
+                                                        <fieldset>
+                                                            <textarea type="text" name="body" id="body"
+                                                                placeholder="News Content.." required></textarea>
+                                                        </fieldset>
                                                     </div>
-                                                  </div>
+                                                </div>
                                                 <button type="submit" class="btn btn-sm"
-                                                style="background-color:#43ba7f; color:#fff;">post</button>
+                                                    style="background-color:#43ba7f; color:#fff;">post</button>
                                             </form>
                                         </div>
                                     </div>
@@ -123,6 +125,7 @@
                                 <br> {{news.body}}
                                 <br> {{news.created | timesince}}
                                 </p>
+                                <hr>
                                 {%endfor%}
                             </div>
                         </div>
