@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from hoodapp.models import Hood, Profile
+from hoodapp.models import Hood, Profile, News
 from .forms import CreateHoodForm, RegisterForm, UpdateProfileForm
 from .emails import send_welcome_email
 
@@ -78,8 +78,17 @@ def hoods(request):
 
 def single_hood(request, name):
     hood = Hood.objects.get(name = name)
+    news = News.objects.filter(hood = hood)
     current_user = Profile.objects.get(owner = request.user)
-    ctx = {'hood': hood, 'current_user': current_user}
+
+    if request.method == 'POST':
+        poster = Profile.objects.get(owner = request.user)
+        title = request.POST.get('title')
+        body = request.POST.get('body')
+        new_news = News.objects.create(title = title, body =body, poster = poster, hood =hood)
+        new_news.save()
+
+    ctx = {'hood': hood, 'current_user': current_user, 'news':news}
     return render(request, 'hoodapp/single-hood.html', ctx)
 
 @login_required(login_url='login')

@@ -21,3 +21,17 @@ class Profile(models.Model):
 
     def __str__(self):
         return self.owner.username
+
+
+class News(models.Model):
+    poster = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    title = models.CharField(max_length=300, blank=True, null=True)
+    body = models.TextField()
+    hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) :
+        return self.title
+
+
+

@@ -55,7 +55,6 @@
                 <div class="left-image">
                     <img src="{{hood.img.url}}" alt="">
                 </div>
-
                 <section class="services" id="services">
                     <div class="">
                         <div class="service-item">
@@ -67,7 +66,6 @@
                         </div>
                     </div>
                 </section>
-
             </div>
             <div class="col-lg-6 align-self-center">
                 <div class="accordions is-first-expanded">
@@ -77,14 +75,55 @@
                             <span class="icon">
                                 <i class="icon fa fa-chevron-right"></i>
                             </span>
+
+                            <button type="button" class="btn btn-sm float-end" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                post news
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Post News</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action=""  id='contact' method="POST">
+                                                {%csrf_token%}
+                                                <div class="row">
+                                                    <div class="">
+                                                      <fieldset>
+                                                        <input type="text" name="title" id="name" placeholder="News Tile..." required>
+                                                      </fieldset>
+                                                    </div>
+                                                    <div class="">
+                                                      <fieldset>
+                                                        <textarea type="text" name="body" id="body" placeholder="News Content.."required></textarea>
+                                                      </fieldset>
+                                                    </div>
+                                                  </div>
+                                                <button type="submit" class="btn btn-sm"
+                                                style="background-color:#43ba7f; color:#fff;">post</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="accordion-body">
                             <div class="content">
-                                <p>You will see bunch of businesses listed out within the hood that you joined. These
-                                    businesses will
-                                    be listed to allow easy access from wherever in the hood.
-                                    <br><br>The businesses have numbers and locations listed out for easy access.
+                                {%for news in news %}
+                                <p class="mb-3">
+                                <h6>{{news.title}}</h6>
+                                <br> {{news.body}}
+                                <br> {{news.created | timesince}}
                                 </p>
+                                {%endfor%}
                             </div>
                         </div>
                     </article>
