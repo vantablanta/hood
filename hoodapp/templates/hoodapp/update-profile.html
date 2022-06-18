@@ -1,0 +1,29 @@
+{%extends 'base.html' %}
+{%load static%}
+
+{%block body%}
+
+
+<section class="contact-us-form  mb-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h4>Update Your Profile </h4>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+                {{form}}
+                <div class="row">
+                    <fieldset class="col-md-6">
+                        <button type="submit" id="form-submit" class="orange-button">Submit</button>
+                    </fieldset>
+                </div>     
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+{%endblock%}

@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from .models import Hood
+from .models import Hood, Profile
 
 
 
@@ -25,3 +25,11 @@ class CreateHoodForm(ModelForm):
     class Meta():
         model = Hood
         fields = ['name', 'location', 'img']
+
+class UpdateProfileForm(ModelForm):
+    bio = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'bio'}))
+    pic = forms.FileField(max_length=200,label='',widget=forms.FileInput(attrs={'class': 'form-control mb-4', 'placeholder': 'profile photo'}))
+    
+    class Meta():
+        model = Profile
+        fields = ['bio', 'pic']

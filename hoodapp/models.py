@@ -15,6 +15,7 @@ class Hood(models.Model):
 # Create your models here.
 class Profile(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
+    bio = models.CharField(max_length=300, blank=True, null=True)
     pic = CloudinaryField('image', blank = True)
     hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, null=True, blank=True)
 

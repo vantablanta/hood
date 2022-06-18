@@ -6,30 +6,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12">
-                <nav class="main-nav">
-                    <!-- ***** Logo Start ***** -->
-                    <a href="{%url 'home' %}" class="logo">
-                        <img src="/static/assets/images/logo.png" alt="">
-                    </a>
-                    <!-- ***** Logo End ***** -->
-                
-                    <!-- ***** Menu Start ***** -->
-                    <ul class="nav">
-                        <li class="scroll-to-section"><a href="{%url 'home' %}">Home</a></li>
-                        <li class="scroll-to-section"><a href="{%url 'about-us' %}">About</a></li>
-                        {%if request.user.is_authenticated%}
-                        <li class="scroll-to-section"><a href="{%url 'hood' hood.name%}">{{current_user.hood}}</a></li>
-                        <li class="scroll-to-section"><a href="{%url 'profile' %}">Profile</a></li>
-                        <li class="scroll-to-section"><a href="{%url 'logout' %}">Logout</a></li>
-                        {%else%}
-                        <li class="scroll-to-section"><a href="{%url 'login' %}">Login</a></li>
-                        {%endif%}
-                    </ul>        
-                    <a class='menu-trigger'>
-                        <span>Menu</span>
-                    </a>
-                    <!-- ***** Menu End ***** -->
-                </nav>
+                {%include 'nav.html' %}
             </div>
         </div>
     </div>
@@ -40,7 +17,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="header-text">
-                    <h2>{{hood.name}} Hood</h2>
+                    <h2>{{profile.owner.username | capfirst}}'s Profile</h2>
                     <div class="div-dec"></div>
                 </div>
             </div>
@@ -48,20 +25,39 @@
     </div>
 </div>
 
-<section class="top-section">
+<section class="top-section mb-3">
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
                 <div class="left-image">
-                    <img src="{{hood.img.url}}" alt="">
+                    {%if profile.pic%}
+                    <img src="{{profile.pic.url}}" class="rounded-5 img-fluid" alt="">
+                    {%else%}
+                    <p></p>
+                    {%endif%}
                 </div>
 
                 <section class="services" id="services">
                     <div class="">
                         <div class="service-item">
-                            <h4>Admin ~ {{hood.admin.username}}</h4>
-                            <p>Location ~ {{hood.location}}</p>
-                            <p>Members ~ {{hood.members.owner}}</p>
+                            <h5>Name ~ {{profile.owner.username}}</h5>
+                            <hr>
+                            {%if profile.bio%}
+                            <p>Bio :  {{profile.bio}}</p>
+                            {%else%}
+                            <p></p>
+                            {%endif%}
+                            
+                            {%if profile.owner.email%}
+                            <p>Email : {{profile.owner.email}}</p>
+                            {%else%}
+                            <p></p>
+                            {%endif%}
+                            
+                            <p>Joined hood : {{profile.hood.name}}</p>
+                            <a href="{%url 'update-profile' %}">
+                                <i class="fa-solid fa-user-pen float-end" style="font-size: 20px; color: #ff511a;"></i>
+                            </a>
                         </div>
                     </div>
                 </section>
@@ -139,20 +135,4 @@
         </div>
 </section>
 
-<section class="simple-cta">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5">
-                <h4>Have you recently moved and would like to join a different <em>Hood </em>?
-            </div>
-            <div class="col-lg-7">
-                <div class="buttons">
-                    <div class="orange-button">
-                        <a href="{%url 'hoods' %}">Leave Hood</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 {%endblock%}

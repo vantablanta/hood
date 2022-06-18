@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from hoodapp.models import Hood, Profile
-from .forms import CreateHoodForm, RegisterForm
+from .forms import CreateHoodForm, RegisterForm, UpdateProfileForm
 from .emails import send_welcome_email
 
 
@@ -69,6 +69,7 @@ def about(request):
     ctx = {}
     return render(request, 'hoodapp/about-us.html', ctx)
 
+@login_required(login_url='login')
 def hoods(request):
     hoods = Hood.objects.all()
     member = Profile.objects.get(owner = request.user)
@@ -115,3 +116,22 @@ def create_hood(request):
             return redirect('hoods')
     ctx = {'form': form}
     return render(request, 'hoodapp/create-hood.html', ctx)
+
+def user_profile(request):
+    profile = Profile.objects.get(owner = request.user)
+    ctx = {'profile': profile}
+    return render(request, 'hoodapp/profile.html', ctx)
+
+def update_profile(request):
+    profile = Profile.objects.get(owner = request.user)
+    form = UpdateProfileForm(instance=profile)
+    if request.method == 'POST':
+        form = UpdateProfileForm(request.POST, request.FILES, instance=profile, )
+        if form.is_valid():
+            form.save()
+            return redirect('profile')
+
+
+    ctx = {'profile': profile, 'form':form}
+    return render(request, 'hoodapp/update-profile.html', ctx)
+
