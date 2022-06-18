@@ -66,5 +66,15 @@ class Amenity(models.Model):
     def __str__(self) :
         return self.name
 
+class Comment(models.Model):
+    poster = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    body = models.TextField()
+    hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+
+    def __str__(self) :
+           return f'{self.poster}"s comment'
+
 
 

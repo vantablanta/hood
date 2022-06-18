@@ -61,7 +61,8 @@
                             <h5>Hood admin: {{hood.admin.username}}</h5>
                             <p>Location ~ {{hood.location}}</p>
                             {%if hood.admin.email%}
-                            <p class="float-end"><a href="mailto:{{hood.admin.email}}">Contact Admin</a></p>
+                            <p class="float-end"><a  style="color: #ff511a;" 
+                                href="mailto:{{hood.admin.email}}">Contact Admin</a></p>
                             {%endif%}
                         </div>
                     </div>
@@ -76,20 +77,14 @@
                                 <i class="icon fa fa-chevron-right"></i>
                             </span>
                             <button type="button" class="btn btn-sm float-end">
-                                <a style='color: #212741;'href="{%url 'amenity' hood.name%}">List Amenity</a>
-                             </button> 
+                                <a style='color: #212741;' href="{%url 'amenity' hood.name%}">List Amenity</a>
+                            </button>
                         </div>
                         <div class="accordion-body">
                             <div class="content">
                                 <div class="content">
-                                    {%for news in news %}
-                                    <p class="mb-3">
-                                    <h5>{{news.title}}</h5>
-                                    <br> {{news.body}}
-                                    <br><small class="text-muted">posted {{news.created | timesince}} ago</small> 
-                                    </p>
-                                    {%endfor%}
-                                </div> 
+                                    <!-- for loops -->
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -102,16 +97,17 @@
                             </span>
 
                             <button type="button" class="btn btn-sm float-end">
-                               <a style='color: #212741;'href="{%url 'news' hood.name%}">Post News</a>
-                            </button>                          
+                                <a style='color: #212741;' href="{%url 'news' hood.name%}">Post News</a>
+                            </button>
                         </div>
                         <div class="accordion-body">
                             <div class="content">
                                 {%for news in news %}
                                 <p class="mb-3">
                                 <h5>{{news.title}}</h5>
-                                <br> {{news.body}}
-                                <br><small class="text-muted">posted {{news.created | timesince}} ago</small> 
+                                <br> {{news.body}} <br>
+                                <br><small>By {{news.poster}}</small>
+                                <br><small class="text-muted">posted {{news.created | timesince}} ago</small>
                                 </p>
                                 {%endfor%}
                             </div>
@@ -126,8 +122,8 @@
                             </span>
 
                             <button type="button" class="btn btn-sm float-end">
-                                <a style='color: #212741;'href="{%url 'business' hood.name%}">Post Business</a>
-                             </button>   
+                                <a style='color: #212741;' href="{%url 'business' hood.name%}">Post Business</a>
+                            </button>
                         </div>
                         <div class="accordion-body">
                             <div class="content">
@@ -150,12 +146,41 @@
                             <span class="icon">
                                 <i class="icon fa fa-chevron-right"></i>
                             </span>
+                            <button type="button" class="btn btn-sm float-end" style='color: #212741;'  data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Comment
+                            </button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
+                                                {%csrf_token%}
+                                               <textarea name="body" id="" cols="30" rows="10" placeholder="leave a comment"></textarea>
+                                                <button type="submit" id="form-submit" class="orange-button">Submit</button>
+                                              </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                         <div class="accordion-body">
                             <div class="content">
-                                <p>You can see the various memebrs within your hood and start conversations with them.
-                                    <br><br>Stay connected and with your neigbours right from your phone.
+                                {%for comment in comments %}
+                                <p class="mb-4">
+                                <p>{{comment.body}}</p>
+                                <small class="text-muted">posted {{news.created | timesince}} ago by @{{comment.poster}}</small>
                                 </p>
+                                {%endfor%}
                             </div>
                         </div>
                     </article>
@@ -173,7 +198,7 @@
             <div class="col-lg-7">
                 <div class="buttons">
                     <div class="orange-button">
-                        <a href="{%url 'hoods' %}">Leave Hood</a>
+                        <a href="{%url 'leave' hood.name %}">Leave Hood</a>
                     </div>
                 </div>
             </div>

@@ -14,6 +14,7 @@ urlpatterns = [
     path('about-us/', views.about, name='about-us'),
     path('hoods/', views.hoods, name='hoods'),
     path('join/<str:name>', views.join_hood, name='join-hood'),
+    path('leave/<str:name>', views.leave_hood, name='leave'),
 
     path('hood/<str:name>', views.single_hood, name='hood'),
     path('add_news/<str:name>', views.add_news, name='news'),

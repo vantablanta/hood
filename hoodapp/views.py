@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from hoodapp.models import Business, Hood, Profile, News
+from hoodapp.models import Business, Hood, Profile, News, Comment
 from .forms import AddAmenityForm, CreateHoodForm, RegisterForm, UpdateProfileForm
 from .emails import send_welcome_email
 
@@ -35,7 +35,6 @@ def logout_user(request):
     logout(request)
     return redirect('home')
 
-
 def register_user(request):
     form = RegisterForm()
 
@@ -58,22 +57,18 @@ def register_user(request):
     ctx = {'form': form}
     return render(request, 'hoodapp/auth.html', ctx)
 
-
 def home(request):
     ctx = {}
     return render(request, 'hoodapp/index.html', ctx)
-
 
 @login_required(login_url='login')
 def contact(request):
     ctx = {}
     return render(request, 'hoodapp/contact-us.html', ctx)
 
-
 def about(request):
     ctx = {}
     return render(request, 'hoodapp/about-us.html', ctx)
-
 
 @login_required(login_url='login')
 def hoods(request):
@@ -87,8 +82,15 @@ def single_hood(request, name):
     hood = Hood.objects.get(name=name)
     news = News.objects.filter(hood=hood)
     business = Business.objects.filter(hood=hood)
+    comments = Comment.objects.filter(hood = hood)
     current_user = Profile.objects.get(owner=request.user)
-    ctx = {'hood': hood, 'current_user': current_user, 'news': news, 'business': business}
+    
+    if request.method == "POST":
+        body = request.POST.get('body')
+        new_comment = Comment.objects.create(poster = current_user, body=body, hood=hood)
+        new_comment.save()
+
+    ctx = {'hood': hood, 'current_user': current_user, 'news': news, 'business': business, 'comments':comments}
     return render(request, 'hoodapp/single-hood.html', ctx)
 
 def add_news(request, name):
@@ -125,16 +127,12 @@ def add_amenity(request, name):
     form = AddAmenityForm()
     hood = Hood.objects.get(name=name)
     if request.method == 'POST':
-        owner = Profile.objects.get(owner=request.user) 
-        business_name = request.POST.get('name')
-        location = request.POST.get('location')
-        contact = request.POST.get('contact')
-        new_business = Business.objects.create(owner=owner, name=business_name, location=location, contact=contact, hood=hood)
-        new_business.save()
-        return redirect('hood', hood.name)
+        form = AddAmenityForm(request.POST, request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('hood', hood.name)
     ctx = {'page':page, 'form':form}
     return render(request, 'hoodapp/add.html', ctx)
-
 
 @login_required(login_url='login')
 def join_hood(request, name):
@@ -149,14 +147,14 @@ def join_hood(request, name):
     ctx = {'page': page, 'obj': hood}
     return render(request, 'hoodapp/join.html', ctx)
 
-
 @login_required(login_url='login')
 def leave_hood(request, name):
-    hood = get_object_or_404(Hood, id=id)
-    request.user.profile.hood = None
-    request.user.profile.save()
-    return redirect('hood')
-
+    profile = Profile.objects.get(owner = request.user)
+    hood = get_object_or_404(Hood, name=name)
+    profile.hood = None
+    profile.save()
+    messages.success(request, 'You have successfully left the hood')
+    return redirect('hoods')
 
 @login_required(login_url='login')
 def create_hood(request):
@@ -174,12 +172,11 @@ def create_hood(request):
     ctx = {'form': form}
     return render(request, 'hoodapp/create-hood.html', ctx)
 
-
 def user_profile(request):
     profile = Profile.objects.get(owner=request.user)
-    ctx = {'profile': profile}
+    news = News.objects.filter(poster = profile)
+    ctx = {'profile': profile, 'news': news}
     return render(request, 'hoodapp/profile.html', ctx)
-
 
 def update_profile(request):
     profile = Profile.objects.get(owner=request.user)

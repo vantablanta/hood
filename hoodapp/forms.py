@@ -36,7 +36,7 @@ class UpdateProfileForm(ModelForm):
 
 class AddAmenityForm(ModelForm):
     name = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'amenity name'}))
-    type = forms.ModelChoiceField(queryset=AmenityType.objects.values_list('name', flat=True),widget=forms.Select({'class': 'form-control mb-4', 'placeholder': 'amenity type '}))
+    type = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control mb-4', 'placeholder': 'amenity type '}))
     location = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'location'}))
     phone = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'phone'}))
     email = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'email'}))
