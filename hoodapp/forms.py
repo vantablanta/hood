@@ -2,7 +2,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.forms import ModelForm
 from django.contrib.auth.models import User
-from .models import Hood, Profile
+from .models import Hood, Profile, Amenity, AmenityType
 
 
 
@@ -33,3 +33,14 @@ class UpdateProfileForm(ModelForm):
     class Meta():
         model = Profile
         fields = ['bio', 'pic']
+
+class AddAmenityForm(ModelForm):
+    name = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'amenity name'}))
+    type = forms.ModelChoiceField(queryset=AmenityType.objects.values_list('name', flat=True),widget=forms.Select({'class': 'form-control mb-4', 'placeholder': 'amenity type '}))
+    location = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'location'}))
+    phone = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'phone'}))
+    email = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'email'}))
+    
+    class Meta():
+        model = Amenity
+        fields = ['name', 'type', 'location', 'phone', 'email', ]

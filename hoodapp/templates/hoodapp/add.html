@@ -1,0 +1,168 @@
+{%extends 'base.html'%}
+{%block body%}
+{%if page == 'news' %}
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {%include 'nav.html' %}
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-text">
+                    <h2>Post News</h2>
+                    <div class="div-dec"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="contact-us-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Post News</h6>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="row">
+              <div class="">
+                  <fieldset>
+                      <input type="text" name="title" id="name"
+                          placeholder="News title..." required>
+                  </fieldset>
+              </div>
+              <div class="">
+                  <fieldset>
+                      <textarea type="text" name="body" id="body"
+                          placeholder="News content.." required></textarea>
+                  </fieldset>
+              </div>
+            </div>
+            <button type="submit" id="form-submit" class="orange-button">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+{%endif%}
+
+
+{%if page == 'business' %}
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {%include 'nav.html' %}
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-text">
+                    <h2>Post Your Business</h2>
+                    <div class="div-dec"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="contact-us-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Post Your Business</h6>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
+            {%csrf_token%}
+            <div class="row">
+              <div class="">
+                  <fieldset>
+                      <input type="text" name="name" id="name"
+                          placeholder="Business Name..." required>
+                  </fieldset>
+              </div>
+              <div class="">
+                  <fieldset>
+                      <input type="text" name="location" id="name"
+                          placeholder="Business Location..." required>
+                  </fieldset>
+              </div>
+              <div class="">
+                  <fieldset>
+                      <input type="phone" name="contact" id="body"
+                          placeholder="Contact Number.." required>
+                  </fieldset>
+              </div>
+          </div>
+            <button type="submit" id="form-submit" class="orange-button">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+{%endif%}
+
+
+{%if page == 'amenity' %}
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                {%include 'nav.html' %}
+            </div>
+        </div>
+    </div>
+</header>
+
+<div class="page-heading">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="header-text">
+                    <h2>List an Amenity</h2>
+                    <div class="div-dec"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="contact-us-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Post Your Business</h6>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form}}
+            <button type="submit" id="form-submit" class="orange-button">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+</section>
+{%endif%}
+{%endblock%}

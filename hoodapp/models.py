@@ -22,7 +22,6 @@ class Profile(models.Model):
     def __str__(self):
         return self.owner.username
 
-
 class News(models.Model):
     poster = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.CharField(max_length=300, blank=True, null=True)
@@ -33,11 +32,34 @@ class News(models.Model):
     def __str__(self) :
         return self.title
 
+    class Meta():
+        ordering = ['-created']
+
 class Business(models.Model):
     owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
     name = models.CharField(max_length=300, blank=True, null=True)
-    location = models.TextField()
+    location = models.CharField(max_length=300)
     contact = models.CharField(max_length=300, blank=True, null=True)
+    hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, null=True, blank=True)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) :
+        return self.name
+
+class AmenityType(models.Model):
+    name = models.CharField(max_length=300)
+    listed_by = models.ForeignKey(Profile, on_delete=models.SET_NULL, null=True)
+
+    def __str__(self) :
+            return self.name
+
+class Amenity(models.Model):
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    name = models.CharField(max_length=300, blank=True, null=True)
+    type = models.ForeignKey(AmenityType, on_delete=models.SET_NULL, null=True)
+    location = models.CharField(max_length=300)
+    phone = models.CharField(max_length=300, blank=True, null=True)
+    email = models.CharField(max_length=300, blank=True, null=True)
     hood = models.ForeignKey(Hood, on_delete=models.SET_NULL, null=True, blank=True)
     created = models.DateTimeField(auto_now_add=True)
 
