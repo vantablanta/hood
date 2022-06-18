@@ -23,7 +23,22 @@
     </div>
 </div>
 
-<section class="" id="">
-   
-</section>
+<section class="contact-us-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+          <div class="section-heading">
+            <h6>Create a Hood</h6>
+          </div>
+        </div>
+        <div class="col-lg-10 offset-lg-1">
+          <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
+            {%csrf_token%}
+            {{form}}
+                <button type="submit" id="form-submit" class="orange-button">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
 {%endblock%}

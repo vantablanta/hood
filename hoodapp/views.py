@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from hoodapp.models import Hood, Profile
-from .forms import RegisterForm
+from .forms import CreateHoodForm, RegisterForm
 from .emails import send_welcome_email
 
 
@@ -94,6 +94,7 @@ def join_hood(request, name):
     ctx = {'page':page, 'obj': hood}
     return render(request, 'hoodapp/join.html', ctx)
 
+@login_required(login_url='login')
 def leave_hood(request, name):
     hood = get_object_or_404(Hood, id=id)
     request.user.profile.hood = None
@@ -102,5 +103,15 @@ def leave_hood(request, name):
 
 @login_required(login_url='login')
 def create_hood(request):
-    ctx = {}
+    form  = CreateHoodForm()
+    if request.method == "POST": 
+        form = CreateHoodForm(request.POST, request.FILES)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            location = form.cleaned_data['location']
+            img = form.cleaned_data['img']
+            data = Hood.objects.create(name=name, admin=request.user, location=location, img=img)
+            data.save()
+            return redirect('hoods')
+    ctx = {'form': form}
     return render(request, 'hoodapp/create-hood.html', ctx)
