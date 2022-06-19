@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from hoodapp.models import Amenity, Business, Hood, Profile, News, Comment
+from hoodapp.models import Amenity, Business, Contact, Hood, Profile, News, Comment
 from .forms import AddAmenityForm, CreateHoodForm, RegisterForm, UpdateProfileForm
 from .emails import send_welcome_email
 
@@ -64,6 +64,20 @@ def home(request):
 
 @login_required(login_url='login')
 def contact(request):
+    if request.method == "POST":
+        name = request.POST.get('name')
+        email = request.POST.get('email')
+        phone = request.POST.get('phone')
+        subject = request.POST.get('subject')
+        message = request.POST.get('message')
+        owner = Profile.objects.get(owner = request.user)
+
+        new_message = Contact.objects.create(name= name, email=email, 
+        phone=phone, subject=subject, message=message, owner = owner)
+        new_message.save()
+
+        page = 'contact'
+        return render(request, 'hoodapp/success.html',{'page': page})
     ctx = {}
     return render(request, 'hoodapp/contact-us.html', ctx)
 

@@ -77,7 +77,7 @@ class Comment(models.Model):
 
 class Contact(models.Model):
     name = models.CharField(max_length=300)
-    phone = models.IntegerField()
+    phone = models.TextField()
     email = models.CharField(max_length=300)
     subject = models.CharField(max_length=300)
     message = models.TextField()
