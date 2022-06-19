@@ -35,12 +35,17 @@ class UpdateProfileForm(ModelForm):
         fields = ['bio', 'pic']
 
 class AddAmenityForm(ModelForm):
-    name = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'amenity name'}))
-    type = forms.ChoiceField(widget=forms.Select(attrs={'class': 'form-control mb-4', 'placeholder': 'amenity type '}))
-    location = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'location'}))
-    phone = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'phone'}))
-    email = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'email'}))
+    name = forms.CharField(max_length=200, label='ammenity name',widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
+    location = forms.CharField(max_length=200, label='ammenity location',widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
+    phone = forms.CharField(max_length=200, label='contact number',widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
+    email = forms.CharField(max_length=200, label='contact email',widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
     
     class Meta():
         model = Amenity
         fields = ['name', 'type', 'location', 'phone', 'email', ]
+        labels = {
+            "type": "ammenity type",
+        }
+        widgets = {
+            'type': forms.Select(attrs={'class': 'form-control mb-4 '})
+         }

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
-from hoodapp.models import Business, Hood, Profile, News, Comment
+from hoodapp.models import Amenity, Business, Hood, Profile, News, Comment
 from .forms import AddAmenityForm, CreateHoodForm, RegisterForm, UpdateProfileForm
 from .emails import send_welcome_email
 
@@ -125,9 +125,17 @@ def add_amenity(request, name):
     form = AddAmenityForm()
     hood = Hood.objects.get(name=name)
     if request.method == 'POST':
-        form = AddAmenityForm(request.POST, request.user)
+        form = AddAmenityForm(request.POST)
         if form.is_valid():
-            form.save()
+            profile = Profile.objects.get(owner = request.user)
+            ammenity_name = form.cleaned_data['name']
+            type = form.cleaned_data['type']
+            location= form.cleaned_data['location']
+            phone = form.cleaned_data['phone']
+            email = form.cleaned_data['email']
+            new_amenity = Amenity.objects.create(owner=profile, name=ammenity_name, 
+            type = type, location = location, phone = phone, email = email, hood=hood)
+            new_amenity.save()
             return redirect('hood', hood.name)
     ctx = {'page':page, 'form':form}
     return render(request, 'hoodapp/add.html', ctx)
