@@ -52,8 +52,9 @@ def register_user(request):
 
             profile = Profile.objects.create(owner=user)
             profile.save()
-
-            return render(request, 'hoodapp/success.html')
+            
+            page = 'register'
+            return render(request, 'hoodapp/success.html',{'page': page})
     ctx = {'form': form}
     return render(request, 'hoodapp/auth.html', ctx)
 
@@ -197,3 +198,5 @@ def update_profile(request):
 
     ctx = {'profile': profile, 'form': form}
     return render(request, 'hoodapp/update-profile.html', ctx)
+
+

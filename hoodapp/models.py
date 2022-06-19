@@ -75,5 +75,17 @@ class Comment(models.Model):
     def __str__(self) :
            return f'{self.poster}"s comment'
 
+class Contact(models.Model):
+    name = models.CharField(max_length=300)
+    phone = models.IntegerField()
+    email = models.CharField(max_length=300)
+    subject = models.CharField(max_length=300)
+    message = models.TextField()
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self) :
+           return f"{self.name}'s message"
+
 
 
