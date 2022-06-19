@@ -12,6 +12,22 @@ class Hood(models.Model):
     def __str__(self):
         return self.name
 
+    def create_neighborhood(self):
+        self.save()
+
+    def delete_neighborhood(self):
+        self.delete()
+
+    @classmethod
+    def find_neighborhood(cls, hood_id):
+        return cls.objects.filter(id=hood_id)
+
+# create_neigborhood()
+# delete_neigborhood()
+# find_neigborhood(neigborhood_id)
+# update_neighborhood()
+# update_occupants()
+
 class Profile(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=300, blank=True, null=True)
@@ -44,6 +60,17 @@ class Business(models.Model):
 
     def __str__(self) :
         return self.name
+
+    def create_business(self):
+        self.save()
+
+    def delete_business(self):
+        self.delete()
+
+    @classmethod
+    def search_business(cls, name):
+        return cls.objects.filter(name__icontains=name).all()
+
 
 class AmenityType(models.Model):
     name = models.CharField(max_length=300)

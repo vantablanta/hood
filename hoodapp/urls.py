@@ -21,5 +21,6 @@ urlpatterns = [
     path('add_business/<str:name>', views.add_business, name='business'),
     path('add_amenity/<str:name>', views.add_amenity, name='amenity'),
 
-    path('create-hood/', views.create_hood, name='create-hood')
+    path('create-hood/', views.create_hood, name='create-hood'),
+    path('search/', views.search, name='search')
 ]

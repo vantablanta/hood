@@ -215,3 +215,7 @@ def update_profile(request):
     return render(request, 'hoodapp/update-profile.html', ctx)
 
 
+def search(request):
+    
+    ctx = {}
+    return render(request, 'hoodapp/search.html', ctx)
