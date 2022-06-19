@@ -1,4 +1,4 @@
-# Rater
+# Hood
 >Developed by [Michelle-Njeri](https://github.com/vantablanta)  
   
 ## Description  
