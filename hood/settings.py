@@ -2,6 +2,8 @@ from pathlib import Path
 from dotenv import load_dotenv
 import os 
 import cloudinary
+import django_heroku
+import dj_database_url
 
 env_path = Path('.')/'.env'
 load_dotenv(dotenv_path=env_path)
@@ -12,9 +14,8 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
-
+MODE = 'dev'
+ALLOWED_HOSTS = ['hood-mn.herokuapp.com', '127.0.0.1']
 
 # Application definition
 
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -64,18 +66,24 @@ WSGI_APPLICATION = 'hood.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': str(os.getenv("NAME")),
-        'USER': str(os.getenv("USER")),
-        'PASSWORD': str(os.getenv("PASSWORD")),
-        'HOST': str(os.getenv("HOST")),
-        'PORT':os.getenv("PORT")
+if MODE == 'dev':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': str(os.getenv("NAME")),
+            'USER': str(os.getenv("USER")),
+            'PASSWORD': str(os.getenv("PASSWORD")),
+            'HOST': str(os.getenv("HOST")),
+            'PORT':os.getenv("PORT")
+        }
     }
-}
+else:
+    DATABASES = {
+       'default': dj_database_url.config( default=str(os.getenv('DATABASE_URL')))
+    }
 
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -113,6 +121,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -133,3 +145,5 @@ EMAIL_HOST_PASSWORD= str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
+
+django_heroku.settings(locals())

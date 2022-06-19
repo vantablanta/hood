@@ -8,6 +8,10 @@ django = "*"
 python-dotenv = "*"
 psycopg2 = "*"
 cloudinary = "*"
+gunicorn = "*"
+django-heroku = "*"
+dj-database-url = "*"
+whitenoise = "*"
 
 [dev-packages]
 autopep8 = "*"
