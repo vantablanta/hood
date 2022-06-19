@@ -176,12 +176,6 @@ def user_profile(request):
     ctx = {'profile': profile, 'news': news}
     return render(request, 'hoodapp/profile.html', ctx)
 
-def view_profile(request, name):
-    # news_owner = News.objects.get(owner=name)
-    # profile = Profile.objects.get(owner=news_owner)
-    # ctx = {'profile': profile}
-    return render(request, 'hoodapp/profile.html', )
-
 def update_profile(request):
     profile = Profile.objects.get(owner=request.user)
     form = UpdateProfileForm(instance=profile)

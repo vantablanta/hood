@@ -107,9 +107,6 @@
                                 <h5>{{news.title}}</h5>
                                 <br> {{news.body}} <br>
                                 <br>
-                                <small>By 
-                                    <a href="{%url 'view' news.poster.owner.username%}" style="color: #43ba7f;">{{news.poster}}</a>
-                                </small>
                                 <br><small class="text-muted">posted {{news.created | timesince}} ago</small>
                                 </p>
                                 {%endfor%}
@@ -181,7 +178,9 @@
                                 {%for comment in comments %}
                                 <p class="mb-4">
                                 <p>{{comment.body}}</p>
-                                <small class="text-muted">posted {{news.created | timesince}} ago by @{{comment.poster}}</small>
+                                <small class="text-muted">posted {{comment.created | timesince}} ago by 
+                                    {{comment.poster}}
+                                </small>
                                 </p>
                                 {%endfor%}
                             </div>
