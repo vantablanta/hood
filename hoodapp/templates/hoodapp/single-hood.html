@@ -106,7 +106,10 @@
                                 <p class="mb-3">
                                 <h5>{{news.title}}</h5>
                                 <br> {{news.body}} <br>
-                                <br><small>By {{news.poster}}</small>
+                                <br>
+                                <small>By 
+                                    <a href="{%url 'view' news.poster.owner.username%}" style="color: #43ba7f;">{{news.poster}}</a>
+                                </small>
                                 <br><small class="text-muted">posted {{news.created | timesince}} ago</small>
                                 </p>
                                 {%endfor%}

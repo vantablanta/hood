@@ -70,13 +70,11 @@ def about(request):
     ctx = {}
     return render(request, 'hoodapp/about-us.html', ctx)
 
-@login_required(login_url='login')
 def hoods(request):
     hoods = Hood.objects.all()
     member = Profile.objects.get(owner=request.user)
     ctx = {'hoods': hoods, 'member': member}
     return render(request, 'hoodapp/hoods.html', ctx)
-
 
 def single_hood(request, name):
     hood = Hood.objects.get(name=name)
@@ -177,6 +175,12 @@ def user_profile(request):
     news = News.objects.filter(poster = profile)
     ctx = {'profile': profile, 'news': news}
     return render(request, 'hoodapp/profile.html', ctx)
+
+def view_profile(request, name):
+    # news_owner = News.objects.get(owner=name)
+    # profile = Profile.objects.get(owner=news_owner)
+    # ctx = {'profile': profile}
+    return render(request, 'hoodapp/profile.html', )
 
 def update_profile(request):
     profile = Profile.objects.get(owner=request.user)
