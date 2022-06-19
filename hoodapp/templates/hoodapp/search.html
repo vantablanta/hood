@@ -28,8 +28,26 @@
 
 <section class="services" id="services">
   <div class="container">
-    <div class="row">
-      
+    <div class="">
+    {%if business %}
+        <div class="">
+            <div class="mb-3">
+                {%for business in business %}
+                <p class="mb-3">
+                <h6>{{business.name | capfirst}}</h6>
+                <br> {{business.owner | capfirst}}
+                <br> {{business.location | capfirst}}
+                <br> {{business.contact}}
+                <br> <small class="text-muted">active since {{business.created | timesince}}</small>
+                </p>
+                {%endfor%}
+            </div>
+        </div>
+    {%else%}
+    <div class="fs-3 text-center m-5 p-5">
+        Sorry we haven't found any matching results  for your search!
+    </div>
+    {%endif%}
     </div>
   </div> 
 </section>

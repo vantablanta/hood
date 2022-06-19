@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
+from django.db.models import Q
 from django.contrib import messages
 from hoodapp.models import Amenity, Business, Contact, Hood, Profile, News, Comment
 from .forms import AddAmenityForm, CreateHoodForm, RegisterForm, UpdateProfileForm
@@ -216,6 +217,11 @@ def update_profile(request):
 
 
 def search(request):
-    
-    ctx = {}
+    query  = request.GET.get('query')
+    if query:
+        business = Business.objects.filter(
+            Q(name__icontains=query) | 
+            Q(owner__owner__username__icontains=query)
+        )
+    ctx = {'business': business}
     return render(request, 'hoodapp/search.html', ctx)
