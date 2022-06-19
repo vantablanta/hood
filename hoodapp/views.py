@@ -78,6 +78,7 @@ def hoods(request):
 
 def single_hood(request, name):
     hood = Hood.objects.get(name=name)
+    amenity = Amenity.objects.filter(hood=hood)
     news = News.objects.filter(hood=hood)
     business = Business.objects.filter(hood=hood)
     comments = Comment.objects.filter(hood = hood)
@@ -88,7 +89,7 @@ def single_hood(request, name):
         new_comment = Comment.objects.create(poster = current_user, body=body, hood=hood)
         new_comment.save()
 
-    ctx = {'hood': hood, 'current_user': current_user, 'news': news, 'business': business, 'comments':comments}
+    ctx = {'hood': hood, 'current_user': current_user, 'amenity':amenity, 'news': news, 'business': business, 'comments':comments}
     return render(request, 'hoodapp/single-hood.html', ctx)
 
 def add_news(request, name):
@@ -128,12 +129,12 @@ def add_amenity(request, name):
         form = AddAmenityForm(request.POST)
         if form.is_valid():
             profile = Profile.objects.get(owner = request.user)
-            ammenity_name = form.cleaned_data['name']
+            amenity_name = form.cleaned_data['name']
             type = form.cleaned_data['type']
             location= form.cleaned_data['location']
             phone = form.cleaned_data['phone']
             email = form.cleaned_data['email']
-            new_amenity = Amenity.objects.create(owner=profile, name=ammenity_name, 
+            new_amenity = Amenity.objects.create(owner=profile, name=amenity_name, 
             type = type, location = location, phone = phone, email = email, hood=hood)
             new_amenity.save()
             return redirect('hood', hood.name)

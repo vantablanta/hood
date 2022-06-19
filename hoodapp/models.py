@@ -12,7 +12,6 @@ class Hood(models.Model):
     def __str__(self):
         return self.name
 
-# Create your models here.
 class Profile(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
     bio = models.CharField(max_length=300, blank=True, null=True)

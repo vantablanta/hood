@@ -83,7 +83,17 @@
                         <div class="accordion-body">
                             <div class="content">
                                 <div class="content">
-                                    <!-- for loops -->
+                                {%for amenity in amenity %}
+                                <p class="mb-3">
+                                    <h6> {{amenity.name | capfirst}}</h6>
+                                    <br> {{amenity.location | capfirst}}
+                                    <br> {{amenity.phone | capfirst}}
+                                    <br> {{amenity.email}}
+                                    <br><br>
+                                    <small style="color: #ff511a;"><small>{{amenity.type}}</small></small>
+                                    <br> <small class="text-muted">active since {{amenity.created | timesince}}</small>
+                                    </p>
+                                {%endfor%}
                                 </div>
                             </div>
                         </div>
@@ -104,7 +114,7 @@
                             <div class="content">
                                 {%for news in news %}
                                 <p class="mb-3">
-                                <h5>{{news.title}}</h5>
+                                <h6>{{news.title}}</h6>
                                 <br> {{news.body}} <br>
                                 <br>
                                 <br><small class="text-muted">posted {{news.created | timesince}} ago</small>
@@ -129,7 +139,7 @@
                             <div class="content">
                                 {%for business in business %}
                                 <p class="mb-3">
-                                <h5>{{business.name | capfirst}}</h5>
+                                <h6>{{business.name | capfirst}}</h6>
                                 <br> {{business.owner | capfirst}}
                                 <br> {{business.location | capfirst}}
                                 <br> {{business.contact}}
