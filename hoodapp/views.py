@@ -85,6 +85,7 @@ def about(request):
     ctx = {}
     return render(request, 'hoodapp/about-us.html', ctx)
 
+@login_required(login_url='login')
 def hoods(request):
     hoods = Hood.objects.all()
     member = Profile.objects.get(owner=request.user)

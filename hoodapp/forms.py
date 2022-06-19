@@ -27,8 +27,8 @@ class CreateHoodForm(ModelForm):
         fields = ['name', 'location', 'img']
 
 class UpdateProfileForm(ModelForm):
-    bio = forms.CharField(max_length=200, label='',widget=forms.TextInput(attrs={'class': 'form-control mb-4', 'placeholder': 'bio'}))
-    pic = forms.FileField(max_length=200,label='',widget=forms.FileInput(attrs={'class': 'form-control mb-4', 'placeholder': 'profile photo'}))
+    bio = forms.CharField(max_length=200, label='bio',widget=forms.TextInput(attrs={'class': 'form-control mb-4'}))
+    pic = forms.FileField(max_length=200,label='upload profile photo',widget=forms.FileInput(attrs={'class': 'form-control mb-4'}))
     
     class Meta():
         model = Profile

@@ -77,7 +77,7 @@
                                 <i class="icon fa fa-chevron-right"></i>
                             </span>
                             <button type="button" class="btn btn-sm float-end">
-                                <a style='color: #212741;' href="{%url 'amenity' hood.name%}">List Amenity</a>
+                                <a style='color: #43ba7f;' href="{%url 'amenity' hood.name%}">List Amenity</a>
                             </button>
                         </div>
                         <div class="accordion-body">
@@ -107,7 +107,7 @@
                             </span>
 
                             <button type="button" class="btn btn-sm float-end">
-                                <a style='color: #212741;' href="{%url 'news' hood.name%}">Post News</a>
+                                <a style='color: #43ba7f;' href="{%url 'news' hood.name%}">Post News</a>
                             </button>
                         </div>
                         <div class="accordion-body">
@@ -132,7 +132,7 @@
                             </span>
 
                             <button type="button" class="btn btn-sm float-end">
-                                <a style='color: #212741;' href="{%url 'business' hood.name%}">Post Business</a>
+                                <a style='color: #43ba7f;' href="{%url 'business' hood.name%}">Post Business</a>
                             </button>
                         </div>
                         <div class="accordion-body">
@@ -156,7 +156,7 @@
                             <span class="icon">
                                 <i class="icon fa fa-chevron-right"></i>
                             </span>
-                            <button type="button" class="btn btn-sm float-end" style='color: #212741;'  data-bs-toggle="modal"
+                            <button type="button" class="btn btn-sm float-end" style='color: #43ba7f;'  data-bs-toggle="modal"
                                 data-bs-target="#exampleModal">
                                 Comment
                             </button>
@@ -166,14 +166,14 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <h5 class="modal-title" id="exampleModalLabel">Drop a Comment</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body">
                                             <form id="contact" action="" method="POST" class="mb-3" enctype="multipart/form-data">
                                                 {%csrf_token%}
-                                               <textarea name="body" id="" cols="30" rows="10" placeholder="leave a comment"></textarea>
+                                               <textarea name="body" id="" cols="30" rows="10" placeholder="... "></textarea>
                                                 <button type="submit" id="form-submit" class="orange-button">Submit</button>
                                               </form>
                                         </div>

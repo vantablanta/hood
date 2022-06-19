@@ -33,7 +33,7 @@
                     {%if profile.pic%}
                     <img src="{{profile.pic.url}}" class="rounded-5 w-50">
                     {%else%}
-                    <p></p>
+                    <p>Edit your profile to upload a profile picture</p>
                     {%endif%}
                 </div>
             </div>
@@ -58,7 +58,7 @@
             <section class=" col-lg-6 mt-3" id="services">
                 <div class="">
                     <div class="service-item">
-                        <h5>Name ~ {{profile.owner.username}}</h5>
+                        <h6>{{profile.owner.username}}</h6>
                         <hr>
                         {%if profile.bio%}
                         <p>Bio : {{profile.bio}}</p>
