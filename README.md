@@ -10,14 +10,13 @@ From contact information of different handyman to meeting announcements or even 
   
 
 ## User Story  
-  
 * Sign in to the application to start using.
 * Check out available hoods and join one.
-* Create a hood if you dont find any suitable ones for you.
+* Create a hood if you dont find any suitable one for you.
 * See news alerts posted
-* See amenitites listed in the hood
+* See amenities listed in the hood
 * See businesses within the hood 
-* Interact woh your hood mates by commenitng in the comments section
+* Interact with your hood mates by commenting in the comments section
     
 ## Setup and Installation  
 To get the project .......  
@@ -28,7 +27,7 @@ To get the project .......
 ```
 ##### Navigate into the folder
  ```bash 
-cd project-gram
+cd project-hood
 ```
 ##### Install and activate Virtual  
  ```bash 
