@@ -82,7 +82,7 @@ else:
        'default': dj_database_url.config( default=str(os.getenv('DATABASE_URL')))
     }
 
-db_from_env = dj_database_url.config()
+db_from_env = dj_database_url.config(conn_max_age=0, ssl_require=False)
 DATABASES['default'].update(db_from_env)
 
 # Password validation
@@ -146,4 +146,4 @@ EMAIL_HOST_PASSWORD= str(os.getenv('EMAIL_HOST_PASSWORD'))
 
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 
-django_heroku.settings(locals())
+django_heroku.settings(locals() ,databases=False)
